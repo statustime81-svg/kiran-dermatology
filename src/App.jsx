@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 
 // Layouts
@@ -42,7 +42,6 @@ import BlogForm from './pages/admin/Blogs/BlogForm'
 import GalleryList from './pages/admin/Gallery/GalleryList'
 import GalleryForm from './pages/admin/Gallery/GalleryForm'
 
-
 function TempPlaceholder({ title }) {
   return (
     <div className="min-h-[60vh] flex items-center justify-center">
@@ -56,6 +55,10 @@ function TempPlaceholder({ title }) {
 
 export default function App() {
   const [loading, setLoading] = useState(true)
+  const location = useLocation()
+
+  // ✅ Check karo admin route pe hai ya nahi
+  const isAdminRoute = location.pathname.startsWith('/admin')
 
   useEffect(() => {
     const hasVisited = sessionStorage.getItem('kd-visited')
@@ -75,11 +78,15 @@ export default function App() {
 
       {!loading && (
         <>
-          {/* Public site globals */}
-          <ScrollProgress />
-          <ScrollToTop />
-          <WhatsAppFloat />
-          <ScrollToTopButton />
+          {/* ✅ Public site globals — sirf public pages pe */}
+          {!isAdminRoute && (
+            <>
+              <ScrollProgress />
+              <ScrollToTop />
+              <WhatsAppFloat />
+              <ScrollToTopButton />
+            </>
+          )}
 
           <Routes>
             {/* ================= PUBLIC ROUTES ================= */}
@@ -93,8 +100,14 @@ export default function App() {
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/appointment" element={<Appointment />} />
-              <Route path="/privacy-policy" element={<TempPlaceholder title="Privacy Policy" />} />
-              <Route path="/terms" element={<TempPlaceholder title="Terms & Conditions" />} />
+              <Route
+                path="/privacy-policy"
+                element={<TempPlaceholder title="Privacy Policy" />}
+              />
+              <Route
+                path="/terms"
+                element={<TempPlaceholder title="Terms & Conditions" />}
+              />
             </Route>
 
             {/* ================= ADMIN ROUTES ================= */}
@@ -105,27 +118,38 @@ export default function App() {
                 {/* Dashboard */}
                 <Route path="/admin" element={<AdminDashboard />} />
 
-                {/* Working pages */}
+                {/* Appointments & Contacts */}
                 <Route path="/admin/appointments" element={<AdminAppointments />} />
                 <Route path="/admin/contacts" element={<AdminContacts />} />
 
-
+                {/* Services */}
                 <Route path="/admin/services" element={<ServicesList />} />
                 <Route path="/admin/services/new" element={<ServiceForm />} />
                 <Route path="/admin/services/edit/:id" element={<ServiceForm />} />
 
-                <Route path="/admin/testimonials" element={<TestimonialsList />} />
-                <Route path="/admin/testimonials/new" element={<TestimonialForm />} />
-                <Route path="/admin/testimonials/edit/:id" element={<TestimonialForm />} />
+                {/* Testimonials */}
+                <Route
+                  path="/admin/testimonials"
+                  element={<TestimonialsList />}
+                />
+                <Route
+                  path="/admin/testimonials/new"
+                  element={<TestimonialForm />}
+                />
+                <Route
+                  path="/admin/testimonials/edit/:id"
+                  element={<TestimonialForm />}
+                />
+
+                {/* Blogs */}
                 <Route path="/admin/blogs" element={<BlogsList />} />
                 <Route path="/admin/blogs/new" element={<BlogForm />} />
                 <Route path="/admin/blogs/edit/:id" element={<BlogForm />} />
 
+                {/* Gallery */}
                 <Route path="/admin/gallery" element={<GalleryList />} />
                 <Route path="/admin/gallery/new" element={<GalleryForm />} />
                 <Route path="/admin/gallery/edit/:id" element={<GalleryForm />} />
-
-                
               </Route>
             </Route>
 
