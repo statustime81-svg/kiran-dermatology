@@ -7,6 +7,10 @@ export default function BeforeAfterSlider({ item, index = 0 }) {
   const [isDragging, setIsDragging] = useState(false)
   const containerRef = useRef(null)
 
+  // ✅ Support both Supabase (snake_case) and static (camelCase)
+  const beforeImage = item.before_image || item.before
+  const afterImage = item.after_image || item.after
+
   const handleMove = (clientX) => {
     if (!containerRef.current) return
     const rect = containerRef.current.getBoundingClientRect()
@@ -61,13 +65,15 @@ export default function BeforeAfterSlider({ item, index = 0 }) {
         {/* After Image (base) */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-primary-100 to-accent-100" />
-          <img
-            src={item.after}
-            alt={`${item.title} after`}
-            className="relative w-full h-full object-cover pointer-events-none"
-            draggable={false}
-            onError={(e) => (e.target.style.opacity = 0)}
-          />
+          {afterImage && (
+            <img
+              src={afterImage}
+              alt={`${item.title} after`}
+              className="relative w-full h-full object-cover pointer-events-none"
+              draggable={false}
+              onError={(e) => (e.target.style.opacity = 0)}
+            />
+          )}
           <span className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-widest shadow-lg">
             After
           </span>
@@ -79,14 +85,16 @@ export default function BeforeAfterSlider({ item, index = 0 }) {
           style={{ width: `${position}%` }}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300">
-            <img
-              src={item.before}
-              alt={`${item.title} before`}
-              className="w-full h-full object-cover pointer-events-none"
-              style={{ width: containerRef.current?.offsetWidth || '100%' }}
-              draggable={false}
-              onError={(e) => (e.target.style.opacity = 0)}
-            />
+            {beforeImage && (
+              <img
+                src={beforeImage}
+                alt={`${item.title} before`}
+                className="w-full h-full object-cover pointer-events-none"
+                style={{ width: containerRef.current?.offsetWidth || '100%' }}
+                draggable={false}
+                onError={(e) => (e.target.style.opacity = 0)}
+              />
+            )}
           </div>
           <span className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-secondary text-white text-xs font-bold uppercase tracking-widest shadow-lg">
             Before
@@ -120,10 +128,12 @@ export default function BeforeAfterSlider({ item, index = 0 }) {
           <h3 className="font-heading font-semibold text-secondary text-base leading-snug">
             {item.title}
           </h3>
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-50 text-[10px] font-semibold text-primary-700 uppercase tracking-wide shrink-0">
-            <Sparkles className="w-3 h-3" />
-            {item.category}
-          </span>
+          {item.category && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-50 text-[10px] font-semibold text-primary-700 uppercase tracking-wide shrink-0">
+              <Sparkles className="w-3 h-3" />
+              {item.category}
+            </span>
+          )}
         </div>
 
         {item.description && (
