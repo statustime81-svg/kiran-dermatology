@@ -283,7 +283,7 @@ export default function Footer() {
             ============================================ */}
         <div className="pt-6 border-t border-white/10 flex flex-col items-center gap-5">
           {/* Copyright + Links row */}
-          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/50">
+          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/100">
             <p className="text-center md:text-left">
               © {currentYear} {SITE_INFO.name}. All rights reserved.
             </p>
