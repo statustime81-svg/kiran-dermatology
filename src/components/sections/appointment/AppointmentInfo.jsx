@@ -7,9 +7,9 @@ const infoCards = [
     icon: Clock,
     title: 'Working Hours',
     lines: [
-      `Mon–Fri: ${CONTACT_INFO.hours.weekdays}`,
-      `Saturday: ${CONTACT_INFO.hours.saturday}`,
-      `Sunday: ${CONTACT_INFO.hours.sunday}`,
+      'Mon, Wed–Sun: 11:00 AM – 7:00 PM',
+      'Tuesday: Closed',
+      'All other days open',
     ],
   },
   {
