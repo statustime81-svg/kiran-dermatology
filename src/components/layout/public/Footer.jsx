@@ -281,37 +281,37 @@ export default function Footer() {
         {/* ============================================
             Bottom Bar
             ============================================ */}
-      <div className="pt-6 border-t border-white/10 flex flex-col items-center gap-5">
-  {/* Copyright + Links row */}
-  <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-    <p className="text-center md:text-left text-white/90 font-medium">
-      © {currentYear} {SITE_INFO.name}. All rights reserved.
-    </p>
-    <div className="flex items-center gap-5">
-      <Link
-        to="/privacy-policy"
-        className="text-white/90 hover:text-primary font-medium transition-colors"
-      >
-        Privacy Policy
-      </Link>
-      <Link
-        to="/terms"
-        className="text-white/90 hover:text-primary font-medium transition-colors"
-      >
-        Terms & Conditions
-      </Link>
-    </div>
-  </div>
+        <div className="pt-6 border-t border-white/10 flex flex-col items-center gap-5">
+          {/* Copyright + Links row */}
+          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+            <p className="text-center md:text-left text-white/90 font-medium">
+              © {currentYear} {SITE_INFO.name}. All rights reserved.
+            </p>
+            <div className="flex items-center gap-5">
+              <Link
+                to="/privacy-policy"
+                className="text-white/90 hover:text-primary font-medium transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                to="/terms"
+                className="text-white/90 hover:text-primary font-medium transition-colors"
+              >
+                Terms & Conditions
+              </Link>
+            </div>
+          </div>
 
           {/* ============================================
-              Design & Developed By — Clickkart
+              Design & Developed By — Clickkart Digital
               ============================================ */}
           <a
             href="https://www.clickkartdigital.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 md:gap-4 pl-1.5 md:pl-2 pr-4 md:pr-5 py-1.5 md:py-2 bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 hover:border-primary/40 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-large"
-            aria-label="Design and Developed by Clickkart"
+            aria-label="Design and Developed by Clickkart Digital"
           >
             {/* Logo */}
             <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0 shadow-soft">
@@ -331,7 +331,7 @@ export default function Footer() {
 
             {/* Text */}
             <div className="flex flex-col leading-tight">
-              <span className="text-[9px] md:text-[10px] font-medium tracking-[0.18em] uppercase text-white/50">
+              <span className="text-[9px] md:text-[10px] font-medium tracking-[0.18em] uppercase text-white/70">
                 Design & Developed By
               </span>
               <span className="font-heading font-bold text-white group-hover:text-primary text-sm md:text-base leading-tight transition-colors">
@@ -340,7 +340,7 @@ export default function Footer() {
             </div>
 
             {/* External link arrow */}
-            <ExternalLink className="w-4 h-4 text-white/40 group-hover:text-primary transition-colors ml-1" />
+            <ExternalLink className="w-4 h-4 text-white/70 group-hover:text-primary transition-colors ml-1" />
           </a>
         </div>
       </div>
