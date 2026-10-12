@@ -34,8 +34,6 @@ export default function Home() {
       <ServicesPreview />
       <StatsCounter />
       <WhyChooseUs />
-      <GalleryPreview />
-      <Testimonials />
       <BlogPreview />
       <AppointmentCTA />
     </>
