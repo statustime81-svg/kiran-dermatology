@@ -22,7 +22,6 @@ import Home from './pages/public/Home'
 import About from './pages/public/About'
 import Services from './pages/public/Services'
 import ServiceDetail from './pages/public/ServiceDetail'
-import Gallery from './pages/public/Gallery'
 import Blog from './pages/public/Blog'
 import BlogDetail from './pages/public/BlogDetail'
 import Contact from './pages/public/Contact'
@@ -35,12 +34,9 @@ import AdminAppointments from './pages/admin/Appointments'
 import AdminContacts from './pages/admin/Contacts'
 import ServicesList from './pages/admin/Services/ServicesList'
 import ServiceForm from './pages/admin/Services/ServiceForm'
-import TestimonialsList from './pages/admin/Testimonials/TestimonialsList'
-import TestimonialForm from './pages/admin/Testimonials/TestimonialForm'
 import BlogsList from './pages/admin/Blogs/BlogsList'
 import BlogForm from './pages/admin/Blogs/BlogForm'
-import GalleryList from './pages/admin/Gallery/GalleryList'
-import GalleryForm from './pages/admin/Gallery/GalleryForm'
+
 
 function TempPlaceholder({ title }) {
   return (
@@ -95,7 +91,6 @@ export default function App() {
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
               <Route path="/services/:slug" element={<ServiceDetail />} />
-              <Route path="/gallery" element={<Gallery />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/contact" element={<Contact />} />
@@ -127,30 +122,13 @@ export default function App() {
                 <Route path="/admin/services/new" element={<ServiceForm />} />
                 <Route path="/admin/services/edit/:id" element={<ServiceForm />} />
 
-                {/* Testimonials */}
-                <Route
-                  path="/admin/testimonials"
-                  element={<TestimonialsList />}
-                />
-                <Route
-                  path="/admin/testimonials/new"
-                  element={<TestimonialForm />}
-                />
-                <Route
-                  path="/admin/testimonials/edit/:id"
-                  element={<TestimonialForm />}
-                />
-
+             
                 {/* Blogs */}
                 <Route path="/admin/blogs" element={<BlogsList />} />
                 <Route path="/admin/blogs/new" element={<BlogForm />} />
                 <Route path="/admin/blogs/edit/:id" element={<BlogForm />} />
 
-                {/* Gallery */}
-                <Route path="/admin/gallery" element={<GalleryList />} />
-                <Route path="/admin/gallery/new" element={<GalleryForm />} />
-                <Route path="/admin/gallery/edit/:id" element={<GalleryForm />} />
-              </Route>
+               
             </Route>
 
             {/* 404 */}
