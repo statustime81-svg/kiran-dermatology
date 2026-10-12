@@ -304,17 +304,17 @@ export default function Footer() {
               Design & Developed By — Centered Badge
               ============================================ */}
           <a
-            href="https://www.nexovax.in/"
+            href="https://www.clickkartdigital.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 md:gap-4 pl-1.5 md:pl-2 pr-4 md:pr-5 py-1.5 md:py-2 bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 hover:border-primary/40 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-large"
-            aria-label="Design and Developed by Nexova X"
+            aria-label="Design and Developed by Clickkart"
           >
             {/* Logo */}
             <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0 shadow-soft">
               {!devLogoError ? (
                 <img
-                  src="/nexova.png"
+                  src="/clickkart.png"
                   alt="Nexova X"
                   className="w-full h-full object-contain p-0.5"
                   onError={() => setDevLogoError(true)}
