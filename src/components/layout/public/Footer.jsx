@@ -34,7 +34,7 @@ const ThreadsIcon = ({ className = 'w-5 h-5' }) => (
 )
 
 /* ============================================
-   Social icons mapping
+   Social Icons Mapping
    ============================================ */
 
 const socialIcons = {
@@ -81,9 +81,7 @@ export default function Footer() {
 
       <div className="container-custom relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-12">
-          {/* ============================================
-              Column 1 — Brand + Logo + Social
-              ============================================ */}
+          {/* Column 1 — Brand + Logo + Social */}
           <div>
             <Link to="/" className="inline-block mb-5 group">
               {!logoError ? (
@@ -140,9 +138,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ============================================
-              Column 2 — Quick Links
-              ============================================ */}
+          {/* Column 2 — Quick Links */}
           <div>
             <h3 className="font-heading text-white text-lg font-semibold mb-5">
               Quick Links
@@ -171,9 +167,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ============================================
-              Column 3 — Services
-              ============================================ */}
+          {/* Column 3 — Services */}
           <div>
             <h3 className="font-heading text-white text-lg font-semibold mb-5">
               Our Services
@@ -192,9 +186,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ============================================
-              Column 4 — Contact
-              ============================================ */}
+          {/* Column 4 — Contact */}
           <div>
             <h3 className="font-heading text-white text-lg font-semibold mb-5">
               Get In Touch
@@ -278,9 +270,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ============================================
-            Bottom Bar
-            ============================================ */}
+        {/* Bottom Bar */}
         <div className="pt-6 border-t border-white/10 flex flex-col items-center gap-5">
           {/* Copyright + Links row */}
           <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
@@ -303,9 +293,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ============================================
-              Design & Developed By — Clickkart Digital
-              ============================================ */}
+          {/* Design & Developed By — Clickkart Digital */}
           <a
             href="https://www.clickkartdigital.com/"
             target="_blank"
@@ -313,7 +301,6 @@ export default function Footer() {
             className="group inline-flex items-center gap-3 md:gap-4 pl-1.5 md:pl-2 pr-4 md:pr-5 py-1.5 md:py-2 bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 hover:border-primary/40 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-large"
             aria-label="Design and Developed by Clickkart Digital"
           >
-            {/* Logo */}
             <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0 shadow-soft">
               {!devLogoError ? (
                 <img
@@ -329,7 +316,6 @@ export default function Footer() {
               )}
             </div>
 
-            {/* Text */}
             <div className="flex flex-col leading-tight">
               <span className="text-[9px] md:text-[10px] font-medium tracking-[0.18em] uppercase text-white/70">
                 Design & Developed By
@@ -339,7 +325,6 @@ export default function Footer() {
               </span>
             </div>
 
-            {/* External link arrow */}
             <ExternalLink className="w-4 h-4 text-white/70 group-hover:text-primary transition-colors ml-1" />
           </a>
         </div>
