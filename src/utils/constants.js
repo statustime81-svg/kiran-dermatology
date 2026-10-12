@@ -39,7 +39,7 @@ export const NAV_LINKS = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
   { name: 'Services', path: '/services' },
-  { name: 'Gallery', path: '/gallery' },
+
   { name: 'Blog', path: '/blog' },
   { name: 'Contact', path: '/contact' },
 ]
@@ -73,7 +73,6 @@ export const ROUTES = {
   ABOUT: '/about',
   SERVICES: '/services',
   SERVICE_DETAIL: '/services/:slug',
-  GALLERY: '/gallery',
   BLOG: '/blog',
   BLOG_DETAIL: '/blog/:slug',
   CONTACT: '/contact',
