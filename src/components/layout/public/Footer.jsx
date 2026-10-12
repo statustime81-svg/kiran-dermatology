@@ -265,11 +265,11 @@ export default function Footer() {
                       Hours
                     </p>
                     <span className="text-white/90">
-                      Mon–Fri: {CONTACT_INFO.hours.weekdays}
+                      Mon, Wed–Sun: 11:00 AM – 7:00 PM
                     </span>
                     <br />
-                    <span className="text-white/90">
-                      Sat: {CONTACT_INFO.hours.saturday}
+                    <span className="text-amber-300 font-medium">
+                      Tuesday: Closed
                     </span>
                   </div>
                 </div>
@@ -320,7 +320,6 @@ export default function Footer() {
                   onError={() => setDevLogoError(true)}
                 />
               ) : (
-                /* Fallback — letter C for Clickkart */
                 <span className="font-heading font-bold text-primary text-lg">
                   C
                 </span>
