@@ -21,9 +21,7 @@ export default function AppointmentCTA() {
       <div className="container-custom relative z-10">
         <div className="relative bg-white rounded-3xl shadow-large border border-primary/10 overflow-hidden">
           <div className="grid lg:grid-cols-2 gap-0 items-stretch">
-            {/* ============================================
-                LEFT — Image Side
-                ============================================ */}
+            {/* LEFT — Image Side */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -31,7 +29,6 @@ export default function AppointmentCTA() {
               transition={{ duration: 0.7 }}
               className="relative min-h-[280px] lg:min-h-full bg-gradient-to-br from-primary to-primary-600"
             >
-              {/* Image */}
               <img
                 src="/cta.png"
                 alt="Kiran Dermatology Clinic"
@@ -39,12 +36,9 @@ export default function AppointmentCTA() {
                 onError={(e) => (e.target.style.opacity = 0)}
               />
 
-              {/* Green overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary-700/80 via-primary-600/60 to-primary-500/40" />
 
-              {/* Content on image */}
               <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-10">
-                {/* Rating badge */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +52,6 @@ export default function AppointmentCTA() {
                   </span>
                 </motion.div>
 
-                {/* Small heading on image */}
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -80,9 +73,7 @@ export default function AppointmentCTA() {
               </div>
             </motion.div>
 
-            {/* ============================================
-                RIGHT — Content Side
-                ============================================ */}
+            {/* RIGHT — Content Side */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -90,24 +81,20 @@ export default function AppointmentCTA() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="p-8 md:p-10 lg:p-12 flex flex-col justify-center"
             >
-              {/* Badge */}
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-50 text-xs font-semibold text-primary-700 tracking-widest uppercase mb-5 w-fit">
                 Book Your Visit
               </span>
 
-              {/* Heading */}
               <h2 className="font-heading font-bold text-display-sm md:text-3xl lg:text-4xl text-secondary leading-tight mb-4 text-balance">
                 Ready to Transform Your{' '}
                 <span className="text-primary">Skin & Hair</span>?
               </h2>
 
-              {/* Subtitle */}
               <p className="text-textSecondary leading-relaxed mb-7 text-base md:text-lg">
                 Book a consultation with {SITE_INFO.doctorName} and take the first
                 step towards healthy, confident skin.
               </p>
 
-              {/* Benefits */}
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                 {benefits.map((benefit, i) => (
                   <motion.li
@@ -126,7 +113,6 @@ export default function AppointmentCTA() {
                 ))}
               </ul>
 
-              {/* CTAs */}
               <div className="flex flex-wrap items-center gap-3 mb-5">
                 <Link to="/appointment">
                   <Button size="lg" leftIcon={Calendar} rightIcon={ArrowRight}>
@@ -140,9 +126,8 @@ export default function AppointmentCTA() {
                 </a>
               </div>
 
-              {/* Bottom note */}
               <p className="text-xs text-textMuted">
-                Walk-ins welcome · {CONTACT_INFO.hours.weekdays} (Mon–Fri)
+                Walk-ins welcome · 11:00 AM – 7:00 PM (Tuesday Closed)
               </p>
             </motion.div>
           </div>
