@@ -6,8 +6,7 @@ import {
   Mail,
   Stethoscope,
   BookOpen,
-  MessageSquareQuote,
-  Images,
+
   ArrowUpRight,
   Clock,
   TrendingUp,
@@ -47,8 +46,7 @@ export default function Dashboard() {
         newContactsRes,
         servicesRes,
         blogsRes,
-        testimonialsRes,
-        galleryRes,
+    
         recentApptRes,
         recentContactsRes,
       ] = await Promise.all([
@@ -85,8 +83,7 @@ export default function Dashboard() {
         newContacts: newContactsRes.count || 0,
         services: servicesRes.count || 0,
         blogs: blogsRes.count || 0,
-        testimonials: testimonialsRes.count || 0,
-        gallery: galleryRes.count || 0,
+  
       })
 
       setRecentAppointments(recentApptRes.data || [])
@@ -194,8 +191,8 @@ export default function Dashboard() {
       {/* Secondary Stats Row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { icon: MessageSquareQuote, label: 'Testimonials', value: stats.testimonials },
-          { icon: Images, label: 'Gallery', value: stats.gallery },
+
+        
           { icon: Clock, label: 'Pending', value: stats.pendingAppointments },
           { icon: Mail, label: 'New Messages', value: stats.newContacts },
         ].map((item, i) => (
