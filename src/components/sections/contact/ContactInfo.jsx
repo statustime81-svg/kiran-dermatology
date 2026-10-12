@@ -16,7 +16,6 @@ import { CONTACT_INFO, SOCIAL_LINKS } from '../../../utils/constants'
    Custom SVG Icons — Twitter (X) & Threads
    ============================================ */
 
-// Twitter / X — Official Logo
 const TwitterIcon = ({ className = 'w-5 h-5' }) => (
   <svg
     viewBox="0 0 24 24"
@@ -28,7 +27,6 @@ const TwitterIcon = ({ className = 'w-5 h-5' }) => (
   </svg>
 )
 
-// Threads — Official Logo
 const ThreadsIcon = ({ className = 'w-5 h-5' }) => (
   <svg
     viewBox="0 0 24 24"
@@ -41,14 +39,14 @@ const ThreadsIcon = ({ className = 'w-5 h-5' }) => (
 )
 
 /* ============================================
-   Social Icons Mapping — CHAARON YAHAN HAIN ✅
+   Social Icons Mapping
    ============================================ */
 
 const socialIcons = {
-  facebook: Facebook,      // ✅ Facebook
-  instagram: Instagram,    // ✅ Instagram
-  twitter: TwitterIcon,    // ✅ Twitter / X
-  threads: ThreadsIcon,    // ✅ Threads
+  facebook: Facebook,
+  instagram: Instagram,
+  twitter: TwitterIcon,
+  threads: ThreadsIcon,
 }
 
 const socialLabels = {
@@ -76,7 +74,7 @@ const contactCards = [
     label: 'Phone',
     value: CONTACT_INFO.phone,
     link: `tel:${CONTACT_INFO.phoneRaw}`,
-    hint: 'Mon–Sat, 10 AM – 7 PM',
+    hint: 'Open all days except Tuesday',
     color: 'primary',
   },
   {
@@ -100,8 +98,8 @@ const contactCards = [
   {
     icon: Clock,
     label: 'Working Hours',
-    value: `Mon–Fri: ${CONTACT_INFO.hours.weekdays}`,
-    hint: `Sat: ${CONTACT_INFO.hours.saturday} · Sun: Closed`,
+    value: '11:00 AM – 7:00 PM',
+    hint: 'Tuesday Closed · Open all other days',
     noLink: true,
     color: 'emerald',
   },
@@ -189,19 +187,16 @@ export default function ContactInfo() {
                   {...wrapperProps}
                   className="group relative flex items-start gap-5 bg-white rounded-2xl p-6 border border-borderLight hover:border-primary/30 hover:shadow-large transition-all duration-500 hover:-translate-y-1.5 cursor-pointer h-full overflow-hidden"
                 >
-                  {/* Corner accent */}
                   <div
                     className={`absolute top-0 right-0 w-20 h-20 rounded-full -mr-8 -mt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${colors.accent}`}
                   />
 
-                  {/* Icon */}
                   <div
                     className={`relative w-14 h-14 rounded-2xl ${colors.icon} ${colors.iconHover} flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6`}
                   >
                     <card.icon className="w-6 h-6" />
                   </div>
 
-                  {/* Content */}
                   <div className="flex-1 min-w-0 relative z-10">
                     <p className="text-[10px] font-bold text-textMuted uppercase tracking-widest mb-2">
                       {card.label}
@@ -214,7 +209,6 @@ export default function ContactInfo() {
                     </p>
                   </div>
 
-                  {/* Arrow */}
                   {!card.noLink && (
                     <ArrowUpRight className="relative z-10 w-5 h-5 text-textMuted group-hover:text-primary transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0 mt-1" />
                   )}
@@ -225,7 +219,7 @@ export default function ContactInfo() {
         </div>
 
         {/* ============================================
-            Social Links — CHAARON BUTTONS
+            Social Links
             ============================================ */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -235,12 +229,10 @@ export default function ContactInfo() {
           className="max-w-3xl mx-auto"
         >
           <div className="relative bg-gradient-to-br from-primary-50 via-white to-primary-50 rounded-3xl p-8 md:p-10 border border-primary/15 overflow-hidden">
-            {/* Decorative blobs */}
             <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
             <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
 
             <div className="relative z-10 text-center">
-              {/* Small badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-primary/20 shadow-soft mb-5">
                 <MessageCircle className="w-3.5 h-3.5 text-primary" />
                 <span className="text-[10px] font-bold text-primary-700 uppercase tracking-widest">
@@ -248,7 +240,6 @@ export default function ContactInfo() {
                 </span>
               </div>
 
-              {/* Heading */}
               <h3 className="font-heading font-bold text-2xl md:text-3xl text-secondary mb-3">
                 Follow Us On Social Media
               </h3>
@@ -257,18 +248,12 @@ export default function ContactInfo() {
                 news.
               </p>
 
-              {/* ============================================
-                  Social Buttons Grid — 4 buttons
-                  ============================================ */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 max-w-2xl mx-auto">
                 {['facebook', 'instagram', 'twitter', 'threads'].map((key) => {
                   const Icon = socialIcons[key]
                   const url = SOCIAL_LINKS[key]
 
-                  if (!Icon || !url) {
-                    console.warn(`Missing icon or URL for: ${key}`)
-                    return null
-                  }
+                  if (!Icon || !url) return null
 
                   return (
                     <motion.a
@@ -291,7 +276,6 @@ export default function ContactInfo() {
                 })}
               </div>
 
-              {/* Bottom hint */}
               <p className="text-xs text-textMuted mt-6 flex items-center justify-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 Active on all platforms · Respond within hours
