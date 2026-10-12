@@ -145,6 +145,7 @@ export default function App() {
                 </div>
               }
             />
+               </Route>    
           </Routes>
         </>
       )}
