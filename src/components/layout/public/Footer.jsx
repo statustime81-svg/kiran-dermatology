@@ -281,24 +281,27 @@ export default function Footer() {
         {/* ============================================
             Bottom Bar
             ============================================ */}
-        <div className="pt-6 border-t border-white/10 flex flex-col items-center gap-5">
-          {/* Copyright + Links row */}
-          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/100">
-            <p className="text-center md:text-left">
-              © {currentYear} {SITE_INFO.name}. All rights reserved.
-            </p>
-            <div className="flex items-center gap-5">
-              <Link
-                to="/privacy-policy"
-                className="hover:text-primary transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              <Link to="/terms" className="hover:text-primary transition-colors">
-                Terms & Conditions
-              </Link>
-            </div>
-          </div>
+      <div className="pt-6 border-t border-white/10 flex flex-col items-center gap-5">
+  {/* Copyright + Links row */}
+  <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+    <p className="text-center md:text-left text-white/90 font-medium">
+      © {currentYear} {SITE_INFO.name}. All rights reserved.
+    </p>
+    <div className="flex items-center gap-5">
+      <Link
+        to="/privacy-policy"
+        className="text-white/90 hover:text-primary font-medium transition-colors"
+      >
+        Privacy Policy
+      </Link>
+      <Link
+        to="/terms"
+        className="text-white/90 hover:text-primary font-medium transition-colors"
+      >
+        Terms & Conditions
+      </Link>
+    </div>
+  </div>
 
           {/* ============================================
               Design & Developed By — Clickkart
