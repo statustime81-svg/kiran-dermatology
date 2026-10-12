@@ -333,7 +333,7 @@ export default function Footer() {
                 Design & Developed By
               </span>
               <span className="font-heading font-bold text-white group-hover:text-primary text-sm md:text-base leading-tight transition-colors">
-                Nexova X
+                Clickkart
               </span>
             </div>
 
