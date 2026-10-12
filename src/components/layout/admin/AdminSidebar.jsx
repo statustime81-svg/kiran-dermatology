@@ -5,9 +5,8 @@ import {
   Calendar,
   Mail,
   Stethoscope,
-  MessageSquareQuote,
   BookOpen,
-  Images,
+
   ExternalLink,
   LogOut,
   X,
@@ -23,9 +22,8 @@ const navItems = [
   { name: 'Appointments', path: '/admin/appointments', icon: Calendar },
   { name: 'Contacts', path: '/admin/contacts', icon: Mail },
   { name: 'Services', path: '/admin/services', icon: Stethoscope },
-  { name: 'Testimonials', path: '/admin/testimonials', icon: MessageSquareQuote },
   { name: 'Blogs', path: '/admin/blogs', icon: BookOpen },
-  { name: 'Gallery', path: '/admin/gallery', icon: Images },
+ 
 ]
 
 export default function AdminSidebar({ isOpen, onClose }) {
