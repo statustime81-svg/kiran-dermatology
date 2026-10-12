@@ -301,7 +301,7 @@ export default function Footer() {
           </div>
 
           {/* ============================================
-              Design & Developed By — Centered Badge
+              Design & Developed By — Clickkart
               ============================================ */}
           <a
             href="https://www.clickkartdigital.com/"
@@ -315,14 +315,14 @@ export default function Footer() {
               {!devLogoError ? (
                 <img
                   src="/clickkart.png"
-                  alt="Nexova X"
+                  alt="Clickkart Digital"
                   className="w-full h-full object-contain p-0.5"
                   onError={() => setDevLogoError(true)}
                 />
               ) : (
-                /* Fallback — letter N */
+                /* Fallback — letter C for Clickkart */
                 <span className="font-heading font-bold text-primary text-lg">
-                  N
+                  C
                 </span>
               )}
             </div>
