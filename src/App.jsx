@@ -23,6 +23,7 @@ import ProtectedRoute from './routes/ProtectedRoute'
 // Public Pages
 import Home from './pages/public/Home'
 import LegalPage from './pages/public/LegalPage'
+import SitemapPage from './pages/public/SitemapPage'
 import About from './pages/public/About'
 import Services from './pages/public/Services'
 import ServiceDetail from './pages/public/ServiceDetail'
@@ -96,6 +97,7 @@ export default function App({ prerendered = false }) {
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/appointment" element={<Appointment />} />
+              <Route path="/sitemap" element={<SitemapPage />} />
               <Route
                 path="/privacy-policy"
                 element={<LegalPage kind="privacy" />}

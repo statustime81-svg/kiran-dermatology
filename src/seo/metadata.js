@@ -2,6 +2,11 @@ import { SEO_NAME } from './site.js'
 
 // Complete title strings: the SEO component must not append the brand again.
 export const PAGE_METADATA = {
+  '/sitemap': {
+    title: 'Sitemap | Kiran Skin Clinic, Patna',
+    description: 'Browse all public pages, skin and hair services, published articles and sitemap resources on the Kiran Skin Clinic website.',
+    keywords: 'Kiran Skin Clinic sitemap, website pages, skin treatment services Patna',
+  },
   '/': {
     keywords: 'dermatologist in Patna, skin specialist in Patna, Kiran Skin Clinic, Dr Asmita Singh, skin clinic Bailey Road',
     title: 'Dermatologist & Skin Clinic in Patna | Kiran Skin Clinic',

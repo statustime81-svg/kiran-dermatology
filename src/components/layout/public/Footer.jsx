@@ -291,6 +291,7 @@ export default function Footer() {
                 Terms & Conditions
               </Link>
               <button type="button" className="text-white/90 hover:text-primary font-medium transition-colors" onClick={() => window.dispatchEvent(new Event('kd-open-cookie-preferences'))}>Cookie Preferences</button>
+              <Link to="/sitemap" className="text-white/90 hover:text-primary font-medium transition-colors">Sitemap</Link>
             </div>
           </div>
 
