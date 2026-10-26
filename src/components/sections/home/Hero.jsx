@@ -135,6 +135,8 @@ export default function Hero() {
               {/* Doctor image */}
               <img
                 src={doctor.image}
+                  fetchPriority="high"
+                  decoding="async"
                 alt={doctor.name}
                 className="relative w-full h-full object-cover object-top"
                 onError={(e) => (e.target.style.opacity = 0)}

@@ -1,4 +1,4 @@
-import { useParams, Navigate, Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ChevronRight, Home, Calendar, Clock, ArrowLeft } from 'lucide-react'
 import SEO from '../../components/shared/SEO'
@@ -8,7 +8,8 @@ import AppointmentCTA from '../../components/sections/home/AppointmentCTA'
 import Loader from '../../components/ui/Loader'
 import { useBlog, useBlogs } from '../../hooks/useBlogs'
 import { formatDate } from '../../utils/formatDate'
-import { SITE_INFO } from '../../utils/constants'
+import NotFound from '../../components/shared/NotFound'
+import { absoluteUrl, canonicalUrl, clinic, doctor, breadcrumbSchema } from '../../seo/site'
 
 export default function BlogDetail() {
   const { slug } = useParams()
@@ -24,7 +25,7 @@ export default function BlogDetail() {
   }
 
   if (error || !blog) {
-    return <Navigate to="/blog" replace />
+    return <NotFound />
   }
 
   // Related blogs
@@ -39,16 +40,17 @@ export default function BlogDetail() {
     '@type': 'BlogPosting',
     headline: blog.title,
     description: blog.excerpt,
-    image: coverImage,
-    datePublished: publishedAt,
+    image: coverImage ? absoluteUrl(coverImage) : undefined,
+    mainEntityOfPage: canonicalUrl(`/blog/${slug}`),
+    datePublished: publishedAt || undefined,
+    dateModified: blog.updated_at || publishedAt || undefined,
     author: {
       '@type': 'Person',
-      name: blog.author,
+      name: blog.author || doctor.name,
+      ...( (!blog.author || blog.author === doctor.name) ? { '@id': doctor['@id'], url: doctor.url } : {} ),
     },
     publisher: {
-      '@type': 'Organization',
-      name: SITE_INFO.name,
-      url: SITE_INFO.url,
+      '@id': clinic['@id'],
     },
   }
 
@@ -60,6 +62,7 @@ export default function BlogDetail() {
         keywords={blog.tags?.join(', ')}
         image={coverImage}
         type="article"
+        breadcrumbs={breadcrumbSchema([['Home', '/'], ['Blog', '/blog'], [blog.title, `/blog/${slug}`]])}
         schema={schema}
       />
 

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useId } from 'react'
 import { cn } from '../../utils/cn'
 
 const Input = forwardRef(
@@ -17,7 +17,8 @@ const Input = forwardRef(
     },
     ref
   ) => {
-    const inputId = id || `input-${Math.random().toString(36).slice(2, 9)}`
+    const generatedId = useId()
+    const inputId = id || `input-${generatedId}`
 
     return (
       <div className={cn('w-full', containerClassName)}>

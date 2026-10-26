@@ -4,7 +4,7 @@ export const SITE_INFO = {
   doctorName: 'Dr. (Major) Asmita Singh',
   doctorTitle: 'MBBS, MD (Dermatology)',
   description: 'Expert dermatology care for skin, hair, and laser treatments by Dr. Asmita Singh in Patna.',
-  url: 'https://kirandermatology.com',
+  url: 'https://www.kirandermatology.com',
 }
 
 export const CONTACT_INFO = {

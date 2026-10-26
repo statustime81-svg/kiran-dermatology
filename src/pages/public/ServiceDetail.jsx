@@ -1,4 +1,4 @@
-import { useParams, Navigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import SEO from '../../components/shared/SEO'
 import ServiceDetailHero from '../../components/sections/services/ServiceDetailHero'
 import ServiceOverview from '../../components/sections/services/ServiceOverview'
@@ -8,7 +8,8 @@ import RelatedServices from '../../components/sections/services/RelatedServices'
 import AppointmentCTA from '../../components/sections/home/AppointmentCTA'
 import Loader from '../../components/ui/Loader'
 import { useService } from '../../hooks/useServices'
-import { SITE_INFO } from '../../utils/constants'
+import NotFound from '../../components/shared/NotFound'
+import { canonicalUrl, clinic, breadcrumbSchema } from '../../seo/site'
 
 export default function ServiceDetail() {
   const { slug } = useParams()
@@ -23,20 +24,17 @@ export default function ServiceDetail() {
   }
 
   if (error || !service) {
-    return <Navigate to="/services" replace />
+    return <NotFound />
   }
 
   const schema = {
     '@context': 'https://schema.org',
-    '@type': 'MedicalProcedure',
+    '@type': 'MedicalWebPage',
+    '@id': `${canonicalUrl(`/services/${slug}`)}#treatment`,
+    url: canonicalUrl(`/services/${slug}`),
     name: service.name,
     description: service.short_description || service.shortDescription,
-    procedureType: 'https://schema.org/NoninvasiveProcedure',
-    provider: {
-      '@type': 'MedicalClinic',
-      name: SITE_INFO.name,
-      url: SITE_INFO.url,
-    },
+    about: { '@id': clinic['@id'] },
   }
 
   return (
@@ -45,6 +43,7 @@ export default function ServiceDetail() {
         title={service.name}
         description={service.short_description || service.shortDescription}
         keywords={`${service.name}, dermatology, ${service.slug}, patna skin clinic`}
+        breadcrumbs={breadcrumbSchema([['Home', '/'], ['Services', '/services'], [service.name, `/services/${slug}`]])}
         schema={schema}
       />
 

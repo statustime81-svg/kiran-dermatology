@@ -18,6 +18,7 @@ export const getBlogBySlug = async (slug) => {
     .from('blogs')
     .select('*')
     .eq('slug', slug)
+    .eq('published', true)
     .single()
 
   if (error) throw error

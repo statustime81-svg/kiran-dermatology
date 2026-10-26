@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useId } from 'react'
 import { cn } from '../../utils/cn'
 
 const Textarea = forwardRef(
@@ -16,7 +16,8 @@ const Textarea = forwardRef(
     },
     ref
   ) => {
-    const textareaId = id || `textarea-${Math.random().toString(36).slice(2, 9)}`
+    const generatedId = useId()
+    const textareaId = id || `textarea-${generatedId}`
 
     return (
       <div className={cn('w-full', containerClassName)}>

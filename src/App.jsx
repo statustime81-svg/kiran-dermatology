@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 
@@ -8,6 +8,9 @@ import AdminLayout from './components/layout/admin/AdminLayout'
 
 // Shared
 import Preloader from './components/shared/Preloader'
+import NotFound from './components/shared/NotFound'
+import SEO from './components/shared/SEO'
+import RouteIndexing from './components/shared/RouteIndexing'
 import ScrollToTop from './components/shared/ScrollToTop'
 import ScrollProgress from './components/animations/ScrollProgress'
 import WhatsAppFloat from './components/shared/WhatsAppFloat'
@@ -28,19 +31,20 @@ import Contact from './pages/public/Contact'
 import Appointment from './pages/public/Appointment'
 
 // Admin Pages
-import AdminLogin from './pages/admin/Login'
-import AdminDashboard from './pages/admin/Dashboard'
-import AdminAppointments from './pages/admin/Appointments'
-import AdminContacts from './pages/admin/Contacts'
-import ServicesList from './pages/admin/Services/ServicesList'
-import ServiceForm from './pages/admin/Services/ServiceForm'
-import BlogsList from './pages/admin/Blogs/BlogsList'
-import BlogForm from './pages/admin/Blogs/BlogForm'
+const AdminLogin = lazy(() => import('./pages/admin/Login'))
+const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'))
+const AdminAppointments = lazy(() => import('./pages/admin/Appointments'))
+const AdminContacts = lazy(() => import('./pages/admin/Contacts'))
+const ServicesList = lazy(() => import('./pages/admin/Services/ServicesList'))
+const ServiceForm = lazy(() => import('./pages/admin/Services/ServiceForm'))
+const BlogsList = lazy(() => import('./pages/admin/Blogs/BlogsList'))
+const BlogForm = lazy(() => import('./pages/admin/Blogs/BlogForm'))
 
 
 function TempPlaceholder({ title }) {
   return (
     <div className="min-h-[60vh] flex items-center justify-center">
+      <SEO title={title} noindex />
       <div className="text-center">
         <h1 className="font-heading text-2xl text-slate-700 mb-2">{title}</h1>
         <p className="text-slate-500 text-sm">🚧 Coming soon</p>
@@ -49,8 +53,8 @@ function TempPlaceholder({ title }) {
   )
 }
 
-export default function App() {
-  const [loading, setLoading] = useState(true)
+export default function App({ prerendered = false }) {
+  const [loading, setLoading] = useState(!prerendered)
   const location = useLocation()
 
   // ✅ Check karo admin route pe hai ya nahi
@@ -68,6 +72,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
+      <RouteIndexing />
       <AnimatePresence mode="wait">
         {loading && <Preloader onComplete={handlePreloaderComplete} />}
       </AnimatePresence>
@@ -84,6 +89,7 @@ export default function App() {
             </>
           )}
 
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
           <Routes>
             {/* ================= PUBLIC ROUTES ================= */}
             <Route element={<PublicLayout />}>
@@ -131,22 +137,12 @@ export default function App() {
                
             </Route>
 
+            </Route>
+
             {/* 404 */}
-            <Route
-              path="*"
-              element={
-                <div className="min-h-screen flex items-center justify-center bg-background">
-                  <div className="text-center max-w-xl px-6">
-                    <h1 className="font-heading text-display-sm text-secondary mb-3">
-                      404 Not Found
-                    </h1>
-                    <p className="text-textSecondary">Page not found</p>
-                  </div>
-                </div>
-              }
-            />
-               </Route>    
+            <Route path="*" element={<NotFound />} />
           </Routes>
+          </Suspense>
         </>
       )}
     </ErrorBoundary>

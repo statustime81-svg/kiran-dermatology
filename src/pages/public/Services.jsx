@@ -7,7 +7,7 @@ export default function Services() {
   return (
     <>
       <SEO
-        title="Services"
+        title="Skin, Hair & Laser Treatments in Patna"
         description="Explore our comprehensive dermatology services — acne, hair fall, laser treatments, pigmentation, psoriasis, vitiligo, and more. Expert care by Dr. Asmita Singh in Patna."
         keywords="dermatology services patna, acne treatment, hair fall, laser hair removal, pigmentation, melasma, psoriasis, vitiligo"
       />

@@ -1,25 +1,27 @@
+import { useSnapshot } from '../seo/SnapshotContext'
 import { useState, useEffect, useCallback } from 'react'
 import { getBlogs, getBlogBySlug } from '../services/blogService'
 
 export const useBlogs = (publishedOnly = true) => {
-  const [blogs, setBlogs] = useState([])
-  const [loading, setLoading] = useState(true)
+  const snapshot = useSnapshot()
+  const [blogs, setBlogs] = useState(() => snapshot?.blogs ? snapshot.blogs.filter((row) => !publishedOnly || row.published) : [])
+  const [loading, setLoading] = useState(!snapshot?.blogs)
   const [error, setError] = useState(null)
 
   const fetchBlogs = useCallback(async () => {
     try {
-      setLoading(true)
+      setLoading(!snapshot?.blogs)
       setError(null)
       const data = await getBlogs(publishedOnly)
       setBlogs(data || [])
     } catch (err) {
       console.error('Blogs fetch error:', err)
       setError(err.message)
-      setBlogs([])
+      if (!snapshot?.blogs) setBlogs([])
     } finally {
       setLoading(false)
     }
-  }, [publishedOnly])
+  }, [publishedOnly, snapshot])
 
   useEffect(() => {
     fetchBlogs()
@@ -29,28 +31,33 @@ export const useBlogs = (publishedOnly = true) => {
 }
 
 export const useBlog = (slug) => {
-  const [blog, setBlog] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const snapshot = useSnapshot()
+  const initial = snapshot?.blogs?.find((row) => row.slug === slug)
+  const [blog, setBlog] = useState(initial || null)
+  const [loading, setLoading] = useState(!initial)
   const [error, setError] = useState(null)
 
   useEffect(() => {
     if (!slug) return
+    let cancelled = false
     const fetchBlog = async () => {
       try {
-        setLoading(true)
+        setLoading(!initial)
+        setBlog(initial || null)
         setError(null)
         const data = await getBlogBySlug(slug)
-        setBlog(data)
+        if (!cancelled) setBlog(data)
       } catch (err) {
         console.error('Blog fetch error:', err)
-        setError(err.message)
-        setBlog(null)
+        if (!cancelled && !initial) setError(err.message)
+        if (!cancelled && !initial) setBlog(null)
       } finally {
-        setLoading(false)
+        if (!cancelled) setLoading(false)
       }
     }
     fetchBlog()
-  }, [slug])
+    return () => { cancelled = true }
+  }, [slug, snapshot, initial])
 
   return { blog, loading, error }
 }

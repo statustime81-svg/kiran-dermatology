@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import { Toaster } from 'react-hot-toast'
 
 import App from './App.jsx'
+import { SnapshotContext } from './seo/SnapshotContext'
 import { AuthProvider } from './context/AuthContext.jsx'
 import { UIProvider } from './context/UIContext.jsx'
 
@@ -12,13 +13,17 @@ import './index.css'
 import './styles/fonts.css'
 import './styles/animations.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const snapshot = window.__SEO_SNAPSHOT__ || null
+const root = document.getElementById('root')
+const application = (
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
         <AuthProvider>
           <UIProvider>
-            <App />
+            <SnapshotContext.Provider value={snapshot}>
+              <App prerendered={root.hasAttribute('data-prerendered')} />
+            </SnapshotContext.Provider>
             <Toaster
               position="top-right"
               toastOptions={{
@@ -41,5 +46,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </AuthProvider>
       </BrowserRouter>
     </HelmetProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )
+if (root.hasAttribute('data-prerendered')) ReactDOM.hydrateRoot(root, application)
+else ReactDOM.createRoot(root).render(application)

@@ -7,7 +7,7 @@ export default function Blog() {
   return (
     <>
       <SEO
-        title="Blog"
+        title="Skin & Hair Care Articles"
         description="Dermatologist-written articles on skincare, hair care, acne, pigmentation, and laser treatments. Evidence-based advice from Dr. Asmita Singh."
         keywords="skin care blog, dermatologist blog, hair care tips, acne treatment guide, melasma, laser hair removal"
       />

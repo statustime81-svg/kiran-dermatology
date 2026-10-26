@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useId } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { cn } from '../../utils/cn'
 
@@ -18,7 +18,8 @@ const Select = forwardRef(
     },
     ref
   ) => {
-    const selectId = id || `select-${Math.random().toString(36).slice(2, 9)}`
+    const generatedId = useId()
+    const selectId = id || `select-${generatedId}`
 
     return (
       <div className={cn('w-full', containerClassName)}>

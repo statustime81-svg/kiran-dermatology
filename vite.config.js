@@ -8,6 +8,7 @@ const __dirname = path.dirname(__filename)
 
 export default defineConfig({
   plugins: [react()],
+  ssr: { noExternal: ['react-helmet-async'] },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
