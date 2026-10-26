@@ -8,8 +8,8 @@ import AdminLayout from './components/layout/admin/AdminLayout'
 
 // Shared
 import Preloader from './components/shared/Preloader'
+import CookiePreferences from './components/shared/CookiePreferences'
 import NotFound from './components/shared/NotFound'
-import SEO from './components/shared/SEO'
 import RouteIndexing from './components/shared/RouteIndexing'
 import ScrollToTop from './components/shared/ScrollToTop'
 import ScrollProgress from './components/animations/ScrollProgress'
@@ -22,6 +22,7 @@ import ProtectedRoute from './routes/ProtectedRoute'
 
 // Public Pages
 import Home from './pages/public/Home'
+import LegalPage from './pages/public/LegalPage'
 import About from './pages/public/About'
 import Services from './pages/public/Services'
 import ServiceDetail from './pages/public/ServiceDetail'
@@ -41,17 +42,6 @@ const BlogsList = lazy(() => import('./pages/admin/Blogs/BlogsList'))
 const BlogForm = lazy(() => import('./pages/admin/Blogs/BlogForm'))
 
 
-function TempPlaceholder({ title }) {
-  return (
-    <div className="min-h-[60vh] flex items-center justify-center">
-      <SEO title={title} noindex />
-      <div className="text-center">
-        <h1 className="font-heading text-2xl text-slate-700 mb-2">{title}</h1>
-        <p className="text-slate-500 text-sm">🚧 Coming soon</p>
-      </div>
-    </div>
-  )
-}
 
 export default function App({ prerendered = false }) {
   const [loading, setLoading] = useState(!prerendered)
@@ -59,6 +49,10 @@ export default function App({ prerendered = false }) {
 
   // ✅ Check karo admin route pe hai ya nahi
   const isAdminRoute = location.pathname.startsWith('/admin')
+
+  useEffect(() => {
+    if (isAdminRoute) window['ga-disable-G-R4PWH7Z4S8'] = true
+  }, [isAdminRoute])
 
   useEffect(() => {
     const hasVisited = sessionStorage.getItem('kd-visited')
@@ -82,6 +76,7 @@ export default function App({ prerendered = false }) {
           {/* ✅ Public site globals — sirf public pages pe */}
           {!isAdminRoute && (
             <>
+              <CookiePreferences />
               <ScrollProgress />
               <ScrollToTop />
               <WhatsAppFloat />
@@ -103,11 +98,11 @@ export default function App({ prerendered = false }) {
               <Route path="/appointment" element={<Appointment />} />
               <Route
                 path="/privacy-policy"
-                element={<TempPlaceholder title="Privacy Policy" />}
+                element={<LegalPage kind="privacy" />}
               />
               <Route
                 path="/terms"
-                element={<TempPlaceholder title="Terms & Conditions" />}
+                element={<LegalPage kind="terms" />}
               />
             </Route>
 

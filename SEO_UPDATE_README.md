@@ -1,100 +1,67 @@
-# Kiran Dermatology: SEO update handover
+# Final SEO + legal-page update
 
-Updated: 26 October 2026. Existing React + Vite project retained.
+Updated 26 October 2026. Read this file first; it supersedes earlier handover notes.
 
-## Pehle yeh karein
+## What is ready in this source
 
-1. Apne original repository ka backup / separate branch banayein.
-2. Is archive ke project files ko cloned project mein copy karein. Apna existing `.git` folder aur working `.env.local` preserve karein. Archive mein Git history, node_modules aur built dist intentionally include nahi hain.
-3. Node 22.12+ or Node 24 use karein. Run `npm ci`.
-4. `.env.example` ko `.env.local` mein copy karke existing project ki real public Supabase settings set karein. Existing deployment variables already correct hain to unhi ko retain karein:
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_ANON_KEY`
-   - Optional existing `VITE_WHATSAPP_NUMBER`
-5. Run `npm run build`, then `npm run check:seo`, then `npm run preview`.
-6. Preview at http://127.0.0.1:4173. Test public routes, admin login, appointment form and contact form before deploying.
+- Full Privacy Policy at `/privacy-policy` and Terms & Conditions at `/terms`, replacing Coming soon pages. Both now have unique metadata and are included in the production sitemap.
+- Eight core pages with page-specific titles/descriptions/keywords. Service metadata uses the actual service name and short description; article metadata uses the actual title, excerpt/content and tags. Social previews use the same metadata. Google does not use meta keywords as a ranking factor.
+- Initial HTML rendering, route canonicals, existing clinic/doctor/page schema and relevant detail breadcrumbs.
+- Real generated `sitemap.xml`, `robots.txt`, `llms.txt` and `llms-full.txt`. LLM files include only public pages, services and published articles; no appointments, enquiries or auth data. They are optional reference files, not an AI ranking guarantee. `robot.txt` and `llm.txt` are not additional required files.
+- A generated `seo-metadata.json` report for reviewing every page's title, description and keywords after a build.
+- Admin noindex, correct local 404 handling and retained Vercel clean-URL/admin routing.
+- Analytics privacy choice with Essential only / Accept analytics and footer Cookie Preferences. Existing GA ID retained; Google Analytics is not loaded until acceptance. Added simple privacy/terms notices to forms. Existing form fields and submission services are retained.
+- Original public assets and CSS retained. Existing public-page content, URLs and admin CRUD retained. New legal pages and privacy controls are the intentional visible additions.
 
-**Important:** Supabase credentials were not included in the uploaded ZIP. Production database access and actual clinic forms/admin actions could not be tested here. Do not use service_role keys. No database schema, RLS policies or records were changed.
+## Install and build on your computer
 
-## Exactly what changed
+1. Back up your existing project. Copy these project files into the existing clone, retaining your `.git` and real `.env.local` / `.env`.
+2. Use Node 22.12+ or Node 24. Run `npm ci`.
+3. Ensure actual `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are in `.env.local` or the deployment environment. Use only a public anon/publishable key, never a service-role key.
+4. Run:
 
-- Shared SEO component uses the current route instead of giving every page the homepage canonical. Preferred SEO origin is `https://www.kirandermatology.com`.
-- Route-specific titles, descriptions, canonical, og:url and absolute image URLs are written into initial HTML. Existing visible business copy and service/article content are retained.
-- Build-time rendering generates HTML for the six public core pages and every service/published blog actually returned by your public Supabase API. No demo rows from src/data are used in production.
-- Build creates a real `dist/sitemap.xml`. `public/robots.txt` is copied to dist as text.
-- Removed blanket Vercel SPA rewrite. Clean URLs serve generated HTML. Unknown paths use the host's real 404 response; `404.html` is included. Admin routes retain their client application shell.
-- Clinic / doctor / website / page entities share stable IDs. Service pages use MedicalWebPage instead of incorrectly classifying every service as a non-invasive medical procedure. Visible detail breadcrumbs have BreadcrumbList data. BlogPosting uses actual article title, cover, author and dates.
-- Removed duplicate static SEO/schema from index.html; Helmet owns the generated tags.
-- Admin and unfinished legal placeholder pages are noindex and excluded from sitemap. Legal text itself has NOT been invented or replaced.
-- Unknown service/article paths show Not Found instead of silently redirecting to a listing. Public article detail queries now require `published = true`.
-- Admin editors load separately, reducing public JS payload. Existing CRUD components are untouched.
-- Form IDs use React useId instead of random values, supporting server/client hydration without changing form design.
-- Existing GA4 and Search Console verification code is retained. No new conversion events, tracking IDs, cookie banner or patient-data tracking were introduced.
-- Existing preloader remains in development/client-only mode. Production pages hydrate their already rendered content instead of covering it with an initial preloader.
-
-## Publishing and updates: do not skip
-
-**Services and blog HTML/sitemap are generated at deployment time.** Whenever the admin publishes, unpublishes, edits, deletes or changes the slug of a service/article, rebuild and redeploy so the HTML, direct URLs and sitemap match the latest data. New direct URLs do not exist on the host until that build completes. Old article HTML can remain until redeploy after unpublishing.
-
-For automatic updates, developer should connect a secured server-side Supabase database webhook to a hosting deploy hook. This external integration is NOT configured in this archive. Keep any deploy-hook secret out of VITE_ variables and out of client JavaScript.
-
-Use the default production build: `npm run build`. It deliberately stops if credentials/public SELECT access fail, avoiding deployment of an empty public sitemap. It fetches only services and published blogs, never appointments, contacts or auth records. Current build detects a truncated API result above the initial 1,000-row limit and stops rather than silently publishing an incomplete sitemap; add pagination if your public content grows beyond that.
-
-## Local-only test without credentials
-
-`npm run build:preview` generates only the core routes with no database content and explicit noindex. Then `npm run check:seo` and `npm run preview` can be used to inspect layout/routing.
-
-**Never deploy build:preview output.** An empty preview sitemap and noindex are intentional. Always build again with real credentials using `npm run build` for production. `npm run build:client` is only a raw Vite diagnostic build, not the deploy build.
-
-## Hosting
-
-### Existing Vercel setup
-
-- `vercel.json`: build command `npm run build`; output `dist`; clean URLs; no blanket homepage rewrite.
-- Set your real Supabase public environment variables in the hosting dashboard for the target environment.
-- Set the preferred domain to www.kirandermatology.com in the dashboard and redirect the non-www alias to it. This account-level domain configuration has not been changed here.
-- Verify deployed HTTP and HTTPS domain variants. Check a random missing URL returns 404, not 200. Local static checks cannot prove the production host's behavior.
-
-### If hosting on Nginx instead
-
-Use generated dist as root, and adapt this example to the existing server block. Do not overwrite SSL or other server settings blindly:
-
-```nginx
-location = /admin { try_files /admin-shell.html =404; }
-location ^~ /admin/ { try_files /admin-shell.html =404; }
-location / { try_files $uri $uri.html $uri/ =404; }
-error_page 404 /404.html;
-location = /404.html { internal; }
+```powershell
+npm run build
+npm run check:seo
+npm run preview
 ```
 
-Use appropriate text/plain and application/xml MIME types. Avoid a fallback like `try_files $uri /index.html`, which recreates the original soft-404 issue. For Apache or another host, implement the equivalent actual-file / clean-URL / admin-only fallback rules.
+5. Open http://127.0.0.1:4173. Test main/service/article pages, legal pages, form submissions with your real setup, admin login and cookie preferences.
+6. Preserve `.env.local` as a local ignored file. Review `git status`, then commit/push using your own GitHub account. No GitHub push or live deployment was performed here.
 
-## Acceptance checks after deployment
+The production build needs working public READ access to services and published blogs. It fails instead of silently publishing an empty site when credentials/data fetching fail. It now paginates public content rather than truncating at 1,000 rows.
 
-- `/robots.txt`: HTTP 200, plain text; no HTML.
-- `/sitemap.xml`: HTTP 200, XML; actual core/service/published article URLs; no admin or unfinished legal pages.
-- A real service and article: direct URL and refresh work; unique title and self-canonical; visible content is in View Source.
-- `/a-deliberately-missing-url`: HTTP 404. Valid service/article HTTP 200.
-- One canonical and one title per page; no duplicate homepage schema.
-- Structured data parses, matches visible information, and no invented rating/reviewer data exists.
-- Admin login/refresh/logout and existing forms work with real credentials.
-- Check Search Console URL Inspection rendered HTML and submit the sitemap.
-- Check Rich Results Test / Schema Validator and real mobile PageSpeed data.
-- Verify GA4 Realtime/DebugView. Existing analytics implementation was preserved; actual data collection needs account/browser checks.
+`npm run build:preview` is only for local testing without credentials. It intentionally has no database content, all pages noindex and an empty sitemap. Never deploy that output. `build:client` is a diagnostic Vite build, not the release build.
 
-## AI visibility and remaining editorial work
+## Deployment settings
 
-This update improves crawlability, rendered text, page identity and structured data. There is no special AI-ranking script, and llms.txt is not required for Google AI features. AI citations/ranking are not guaranteed.
+For existing Vercel hosting, use the supplied `vercel.json`, Build Command `npm run build`, Output Directory `dist`, and your real public Supabase variables. Keep the preferred domain www.kirandermatology.com and configure non-www/HTTP redirects in the hosting dashboard. Those account settings have not been changed here.
 
-Clinic team should verify doctor qualifications/registration, exact address/postcode, opening hours and profile links, and review treatment risks, suitability, aftercare and medical references. No new credentials, reviewer labels, dates, prices, ratings, medical claims or visible treatment copy were fabricated in this update. Update Google Business Profile and citations outside the code as needed.
+For other hosting, serve actual files / extensionless HTML URLs, keep admin-only fallback to admin-shell.html, and return actual HTTP 404 for unknown URLs. Do not reintroduce a blanket /index.html fallback. Use plain-text MIME types for .txt and application/xml for the sitemap.
 
-## Validation performed
+After deployment check:
 
-- Original client Vite build passed before the build pipeline was extended.
-- Local no-credentials prerender build passed; generated pages explicitly noindex.
-- Production-style integration build passed against a LOCAL TEST API: 9 service fixtures and 2 published article fixtures, 17 public pages total. These fixtures are NOT in this archive or production code.
-- Automated generated-HTML checks passed: single title/canonical per page, preferred domain, prerendered heading/body, JSON-LD parsing, sitemap membership/count, and no broad fallback rewrite.
-- No live deployment or real production database/admin/form submission was performed.
-- Existing repository lint warnings remain outside the SEO scope; no unrelated cleanup was attempted.
+- `/robots.txt`, `/sitemap.xml`, `/llms.txt`, `/llms-full.txt` return their correct formats, not homepage HTML.
+- Valid pages return 200; a random missing URL returns 404.
+- Privacy and terms contain full text with route-specific canonical/title.
+- Public pages have main content in View Source; no unwanted noindex remains.
+- Search Console sitemap submission and live URL Inspection succeed.
+- Actual forms/admin work and GA4 Realtime receives only consented activity.
 
-Read `SEO_VALIDATION.md` for final test results and any browser-test limits.
+## Analytics dashboard: one external setting
+
+The code emits a pageview for each React route after analytics acceptance. In the GA4 web stream, disable automatic history-based pageviews in Enhanced Measurement (Page views advanced settings) to prevent duplicate SPA pageviews. Review other Enhanced Measurement options against the clinic's privacy practices. This account-side setting cannot be changed from this source archive.
+
+Cookie controls govern this site's Google Analytics loading. Google Fonts, Google Maps and WhatsApp are separate external services; their current use is explained in the Privacy Policy. No claim of blocking all third-party network requests is made.
+
+## Whenever services/articles change
+
+Rebuild/redeploy after publishing, editing, unpublishing, deleting or changing slugs. Static HTML, direct URLs, sitemap and LLM snapshots update at build time. New direct URLs do not exist until the build deploys. For automation, your developer can connect a protected server-side database webhook to a deploy hook; that external integration is not configured in this package. Keep deploy secrets out of browser code.
+
+With the same 52 services and 15 published articles you showed earlier, adding the two complete legal pages should produce 75 public URLs. The actual count depends on current database rows.
+
+## Clinic approval and checks
+
+Legal text uses the known clinic contact details and actual form/provider setup, without inventing cancellation charges, fixed retention periods, registration numbers, guaranteed treatment results or a full legal-compliance certification. Have the clinic verify its details and operating practices before publication. Confirmed timings, coordinates, registration details and additional medical reviews can be added separately.
+
+No dependency upgrades, RLS/schema changes, new conversion events or live account configuration were performed. Previously reported npm audit findings were not resolved in this SEO/legal update; review them separately before release without blindly applying breaking force upgrades. Full real-browser visual testing and actual production DB/admin/form checks remain your release checks.

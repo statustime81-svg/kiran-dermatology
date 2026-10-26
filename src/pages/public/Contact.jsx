@@ -7,11 +7,7 @@ import MapEmbed from '../../components/sections/contact/MapEmbed'
 export default function Contact() {
   return (
     <>
-      <SEO
-        title="Contact Our Skin Clinic in Patna"
-        description="Get in touch with Kiran Dermatology — call, email, or visit us on Bailey Road, Patna. Book your consultation with Dr. Asmita Singh today."
-        keywords="contact dermatologist patna, book skin consultation, kiran dermatology contact, bailey road skin clinic"
-      />
+      <SEO />
 
       <ContactHero />
       <ContactInfo />

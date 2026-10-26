@@ -231,7 +231,8 @@ const onSubmit = async (data) => {
                     {submitting ? 'Booking...' : 'Request Appointment'}
                   </Button>
                 </div>
-              </form>
+              <p className="text-xs text-textMuted leading-relaxed">We use these details to respond to your request. Please read our <a href="/privacy-policy" className="text-primary underline">Privacy Policy</a> and <a href="/terms" className="text-primary underline">Terms &amp; Conditions</a>. Do not include sensitive medical records in this form.</p>
+                </form>
             )}
           </div>
         </div>

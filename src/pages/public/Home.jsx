@@ -11,11 +11,7 @@ export default function Home() {
 
   return (
     <>
-      <SEO
-        title="Dermatologist in Patna"
-        description="Expert dermatology care by Dr. (Major) Asmita Singh — skin, hair & laser treatments in Patna. Book your consultation today."
-        keywords="dermatologist patna, skin clinic patna, hair treatment, laser treatment, Dr Asmita Singh, kiran dermatology"
-      />
+      <SEO />
 
       <Hero />
       <AboutPreview />

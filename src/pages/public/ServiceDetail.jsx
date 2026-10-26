@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import SEO from '../../components/shared/SEO'
+import { serviceMetadata } from '../../seo/metadata'
 import ServiceDetailHero from '../../components/sections/services/ServiceDetailHero'
 import ServiceOverview from '../../components/sections/services/ServiceOverview'
 import ServiceProcedure from '../../components/sections/services/ServiceProcedure'
@@ -27,6 +28,7 @@ export default function ServiceDetail() {
     return <NotFound />
   }
 
+  const metadata = serviceMetadata(service)
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'MedicalWebPage',
@@ -40,9 +42,9 @@ export default function ServiceDetail() {
   return (
     <>
       <SEO
-        title={service.name}
-        description={service.short_description || service.shortDescription}
-        keywords={`${service.name}, dermatology, ${service.slug}, patna skin clinic`}
+        title={metadata.title}
+        description={metadata.description}
+        keywords={metadata.keywords}
         breadcrumbs={breadcrumbSchema([['Home', '/'], ['Services', '/services'], [service.name, `/services/${slug}`]])}
         schema={schema}
       />

@@ -10,11 +10,7 @@ export default function About() {
 
   return (
     <>
-      <SEO
-        title="Dr. (Major) Asmita Singh - Dermatologist in Patna"
-        description="Meet Dr. (Major) Asmita Singh — MBBS (AFMC Pune), MD Dermatology Gold Medalist (KGMU), Ex-Senior Resident AIIMS Patna. 14+ years of dermatology experience."
-        keywords="Dr Asmita Singh, dermatologist Patna, MBBS AFMC, MD KGMU, AIIMS Patna dermatology"
-      />
+      <SEO />
 
       <AboutHero />
       <DoctorBio />

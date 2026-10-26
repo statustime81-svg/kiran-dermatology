@@ -7,11 +7,7 @@ import WhatsAppCTA from '../../components/sections/appointment/WhatsAppCTA'
 export default function Appointment() {
   return (
     <>
-      <SEO
-        title="Book a Dermatology Appointment in Patna"
-        description="Book your dermatology consultation with Dr. Asmita Singh in Patna. Choose your preferred date, time, and treatment — we'll confirm your slot."
-        keywords="book dermatologist appointment patna, skin consultation booking, doctor appointment online"
-      />
+      <SEO />
 
       <AppointmentHero />
       <AppointmentForm />

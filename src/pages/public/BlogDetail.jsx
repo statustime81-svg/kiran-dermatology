@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ChevronRight, Home, Calendar, Clock, ArrowLeft } from 'lucide-react'
 import SEO from '../../components/shared/SEO'
+import { blogMetadata } from '../../seo/metadata'
 import BlogDetailContent from '../../components/sections/blog/BlogDetailContent'
 import BlogCard from '../../components/cards/BlogCard'
 import AppointmentCTA from '../../components/sections/home/AppointmentCTA'
@@ -35,6 +36,7 @@ export default function BlogDetail() {
   const publishedAt = blog.published_at || blog.publishedAt
   const readTime = blog.read_time || blog.readTime
 
+  const metadata = blogMetadata(blog)
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -57,9 +59,9 @@ export default function BlogDetail() {
   return (
     <>
       <SEO
-        title={blog.title}
-        description={blog.excerpt}
-        keywords={blog.tags?.join(', ')}
+        title={metadata.title}
+        description={metadata.description}
+        keywords={metadata.keywords}
         image={coverImage}
         type="article"
         breadcrumbs={breadcrumbSchema([['Home', '/'], ['Blog', '/blog'], [blog.title, `/blog/${slug}`]])}

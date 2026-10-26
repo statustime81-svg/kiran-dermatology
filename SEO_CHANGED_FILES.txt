@@ -1,17 +1,17 @@
-Changed existing files:
-.gitignore
+Final update vs newly uploaded archive
+
+Changed:
+SEO_UPDATE_README.md
+SEO_VALIDATION.md
 index.html
-package.json
+scripts/build-seo.mjs
+scripts/check-seo.mjs
 src/App.jsx
-src/components/sections/home/Hero.jsx
+src/components/layout/public/Footer.jsx
+src/components/sections/appointment/AppointmentForm.jsx
+src/components/sections/contact/ContactForm.jsx
+src/components/shared/RouteIndexing.jsx
 src/components/shared/SEO.jsx
-src/components/ui/DatePicker.jsx
-src/components/ui/Input.jsx
-src/components/ui/Select.jsx
-src/components/ui/Textarea.jsx
-src/hooks/useBlogs.js
-src/hooks/useServices.js
-src/main.jsx
 src/pages/public/About.jsx
 src/pages/public/Appointment.jsx
 src/pages/public/Blog.jsx
@@ -20,22 +20,11 @@ src/pages/public/Contact.jsx
 src/pages/public/Home.jsx
 src/pages/public/ServiceDetail.jsx
 src/pages/public/Services.jsx
-src/services/blogService.js
-src/utils/constants.js
 vercel.json
-vite.config.js
 
-Added files:
-.env.example
-SEO_UPDATE_README.md
-SEO_VALIDATION.md
-public/robots.txt
-scripts/build-seo.mjs
-scripts/check-seo.mjs
-scripts/preview-seo.mjs
-src/components/shared/NotFound.jsx
-src/components/shared/RouteIndexing.jsx
-src/entry-server.jsx
-src/seo/SnapshotContext.jsx
-src/seo/site.js
-SEO_CHANGED_FILES.txt
+Added:
+START_HERE.md
+src/components/shared/CookiePreferences.jsx
+src/pages/public/LegalPage.jsx
+src/seo/legal.js
+src/seo/metadata.js

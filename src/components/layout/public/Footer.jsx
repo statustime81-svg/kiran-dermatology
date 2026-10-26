@@ -277,7 +277,7 @@ export default function Footer() {
             <p className="text-center md:text-left text-white/90 font-medium">
               © {currentYear} {SITE_INFO.name}. All rights reserved.
             </p>
-            <div className="flex items-center gap-5">
+            <div className="flex flex-wrap justify-center items-center gap-5">
               <Link
                 to="/privacy-policy"
                 className="text-white/90 hover:text-primary font-medium transition-colors"
@@ -290,6 +290,7 @@ export default function Footer() {
               >
                 Terms & Conditions
               </Link>
+              <button type="button" className="text-white/90 hover:text-primary font-medium transition-colors" onClick={() => window.dispatchEvent(new Event('kd-open-cookie-preferences'))}>Cookie Preferences</button>
             </div>
           </div>
 

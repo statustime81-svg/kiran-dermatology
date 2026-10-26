@@ -24,9 +24,25 @@ for (const file of files) {
 const robots = await readFile('dist/robots.txt','utf8')
 assert(!robots.includes('<html')); assert(robots.includes('Sitemap: https://www.kirandermatology.com/sitemap.xml'))
 const sitemap = await readFile('dist/sitemap.xml','utf8')
-assert(sitemap.startsWith('<?xml')); assert(!sitemap.includes('/admin'));assert(!sitemap.includes('/terms'));assert(!sitemap.includes('/privacy-policy'))
+assert(sitemap.startsWith('<?xml')); assert(!sitemap.includes('/admin'));assert(!sitemap.includes('/admin-shell'))
 const count = (sitemap.match(/<loc>/g) || []).length
 assert.equal(count, report.mode === 'production' ? report.pages : 0)
 const config = JSON.parse(await readFile('vercel.json','utf8'))
 assert(!config.rewrites.some(r=>r.source.includes('(.*)')))
 console.log(`SEO checks passed: ${files.length} HTML pages; ${count} sitemap URLs; JSON-LD parses; canonical and noindex checks pass.`)
+
+const metadata = JSON.parse(await readFile('dist/seo-metadata.json', 'utf8'))
+assert.equal(metadata.length, report.pages)
+for (const page of metadata) {
+ assert(page.title && page.description && page.keywords, `Complete metadata: ${page.route}`)
+ assert(!/<[^>]+>/.test(page.description), `Plain description: ${page.route}`)
+}
+for (const name of ['llms.txt', 'llms-full.txt']) {
+ const text=await readFile(`dist/${name}`, 'utf8');assert(text.startsWith('# Kiran Skin Clinic'));assert(!text.includes('placeholder.supabase'));
+}
+for (const route of ['privacy-policy','terms']) {
+ const html=await readFile(`dist/${route}.html`, 'utf8');assert(!html.includes('Coming soon'));assert(html.includes('Kiran Skin Clinic'));
+ if(report.mode==='production')assert(!html.includes('content="noindex, follow"'));
+}
+const homepage=await readFile('dist/index.html','utf8');assert(!homepage.includes('src="https://www.googletagmanager.com/gtag/js'));
+console.log('Legal pages, metadata, LLM files and analytics default-off checks passed.')
